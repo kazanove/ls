@@ -2,6 +2,7 @@
 return [
     'routes' => [
         '/404' => 'error',
+        '/' . lng('lawyers_advocates') => 'lawyers_advocates',
     ],
     'name'=>[
         'lawyers_advocates' => '/' . lng('lawyers_advocates'),
@@ -17,5 +18,6 @@ return [
         'login' => '/' . lng('login'),
         'personal_area' => '/' . lng('personal_area'),
         'registration' => '/' . lng('registration'),
+        'send_confirm_email' => '/' . lng('send_confirm_email') . '/[email]',
     ]
 ];

@@ -2,19 +2,21 @@
 function services(DataBase $db): array
 {
     $services = $db->query('SELECT id, sub_id, classification_id FROM services');
-    function recursive(array $data, int $id = 0): array
-    {
-        $_row = [];
-        foreach ($data as $row) {
-            if ((int)$row['sub_id'] === $id) {
-                $_row[] = [
-                    'id' => (int)$row['id'],
-                    'c_id' => (int)$row['classification_id'],
-                    'sub' => recursive($data, $row['id']),
-                ];
+    if (!function_exists('recursive')) {
+        function recursive(array $data, int $id = 0): array
+        {
+            $_row = [];
+            foreach ($data as $row) {
+                if ((int)$row['sub_id'] === $id) {
+                    $_row[] = [
+                        'id' => (int)$row['id'],
+                        'c_id' => (int)$row['classification_id'],
+                        'sub' => recursive($data, $row['id']),
+                    ];
+                }
             }
+            return $_row;
         }
-        return $_row;
     }
 
     return recursive($services);
