@@ -3,6 +3,7 @@ return [
     'routes' => [
         '/404' => 'error',
         '/' . lng('lawyers_advocates') => 'lawyers_advocates',
+        '/' . lng('expertise')=>'expertise',
     ],
     'name'=>[
         'lawyers_advocates' => '/' . lng('lawyers_advocates'),
