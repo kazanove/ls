@@ -81,7 +81,7 @@ function getArr(array $specialists, DataBase $db): array
     return $result ?? [];
 }
 
-function notaries(DataBase $db, int $city_id, int $limit = 0): array
+function notaries(DataBase $db, ?int $city_id, int $limit = 0): array
 {
     $params[':city'] = $city_id;
     if ($limit === 0) {
@@ -92,4 +92,47 @@ function notaries(DataBase $db, int $city_id, int $limit = 0): array
     }
     $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif > NOW()  AND (s.classification_id=4 or s.classification_id=8) ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC '.$l,$params);
     return getArr($specialists, $db);
+}
+function specialistTop(DataBase $db, ?int $city_id, int $limit = 0): array
+{
+    $params[':city'] = $city_id;
+    if ($limit === 0) {
+        $l = '';
+    } else {
+        $l = 'LIMIT :limit';
+        $params[':limit'] = $limit;
+    }
+    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif >NOW() ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC '.$l, $params);
+    return getArr($specialists, $db);
+}
+function lawyersAdvocates(DataBase $db, ?int $city_id, int $limit = 0): array
+{
+    $params[':city'] = $city_id;
+    if ($limit === 0) {
+        $l = '';
+    } else {
+        $l = 'LIMIT :limit';
+        $params[':limit'] = $limit;
+    }
+    $lawyersAdvocates = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif > NOW()  AND (s.classification_id=1 or s.classification_id=2 or s.classification_id=5 or s.classification_id=6) ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC ' . $l, $params);
+    return getArr($lawyersAdvocates, $db);
+}
+function metro(DataBase $db): array
+{
+    $metro_db = $db->query('SELECT * FROM metro');
+    foreach ($metro_db as $metro) {
+        $m[$metro['city_id']][$metro['id']] = $metro['title'];
+    }
+    return $m ?? [];
+}
+function sections(DataBase $db, array $section = []): array
+{
+    foreach ($section as $id) {
+        $img = $db->query('SELECT img FROM services WHERE id=:id LIMIT 1', ['id' => $id])[0];
+        $s[] = [
+            'title' => lng('services.' . $id . '.title'),
+            'img' => $img['img'],
+        ];
+    }
+    return $s ?? [];
 }

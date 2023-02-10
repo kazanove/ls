@@ -143,3 +143,61 @@ function csrf(int $len = 10): string
     }
     return '<input name="' . $_SESSION['token_id'] . '" value="' . $_SESSION['token_value'] . '" hidden>' . "\n";
 }
+/**
+ * @param array $specialists
+ */
+function specialistCards(array $specialists): void
+{
+    if (count($specialists) !== 0) {
+        foreach ($specialists as $st) {
+            $tariff = $st['tariff'];
+            if ($tariff === 4) {
+                $class = 'border';
+            } elseif ($tariff === 3) {
+                $class = 'fav';
+            } elseif ($tariff === 2) {
+                $class = '';
+            } elseif ($tariff === 1) {
+                $class = '';
+            } else {
+                $class = ''; // протестировать
+            }
+            echo ' 
+        <div class="item ' . $class . '" >
+                <div class="image">
+                    <img src="' . asset('img/avatar/' . $st['photo']) . '">
+                    <div class="rating">';
+            for ($i = 0; $i < $st['rating']; $i++) {
+                echo ' <i class="fa fa-star"></i>';
+            }
+            $r = 5 - $st['rating'];
+            for ($i = 0; $i < $r; $i++) {
+                echo ' <i class="fa fa-star-o"></i>';
+            }
+            echo '</div>
+                </div>
+                <div class="name">
+                    ' . $st['name'] . '
+                </div>
+                <div class="prof">
+                    ' . $st['classification'] . '
+                </div>
+                <div class="city">
+                    ' . $st['city'] . '
+                </div>
+                <div class="cats">';
+            if (isset($st['services_provider'])) {
+                echo $st['services_provider'];
+                if ($st['services_provider_count'] !== 0) {
+                    echo lng('and_more') . ' <a href="#">' . $st['services_provider_count'] . ' ' . lng('specializations') . '</a>';
+                }
+            }
+            echo '</div>
+                <a href="' . route('specialist', ['id' => $st['id']]) . '" class="link"></a>
+        </div>';
+        }
+    } else {
+        echo '<div>Нет ни одного специалиста</div>';
+    }
+    //return [$tariff, $class, $i, $r];
+}

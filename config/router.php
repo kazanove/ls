@@ -5,6 +5,10 @@ return [
         '/' . lng('lawyers_advocates') => 'lawyers_advocates',
         '/' . lng('expertise') => 'expertise',
         '/' . lng('notaries') => 'notaries',
+         '/' . lng('blogs')=>'blogs',
+         '/' . lng('about_project')=>'about',
+         '/'=>'main' ,
+
     ],
     'name' => [
         'lawyers_advocates' => '/' . lng('lawyers_advocates'),
@@ -21,5 +25,8 @@ return [
         'personal_area' => '/' . lng('personal_area'),
         'registration' => '/' . lng('registration'),
         'send_confirm_email' => '/' . lng('send_confirm_email') . '/[email]',
+        'section' => '/' . lng('section') . '/[section]',
+        'all_sections' => '/' . lng('all_sections'),
+        'filter' => '/' . lng('filter'),
     ],
 ];
