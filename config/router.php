@@ -3,9 +3,10 @@ return [
     'routes' => [
         '/404' => 'error',
         '/' . lng('lawyers_advocates') => 'lawyers_advocates',
-        '/' . lng('expertise')=>'expertise',
+        '/' . lng('expertise') => 'expertise',
+        '/' . lng('notaries') => 'notaries',
     ],
-    'name'=>[
+    'name' => [
         'lawyers_advocates' => '/' . lng('lawyers_advocates'),
         'expertise' => '/' . lng('expertise'),
         'notaries' => '/' . lng('notaries'),
@@ -20,5 +21,5 @@ return [
         'personal_area' => '/' . lng('personal_area'),
         'registration' => '/' . lng('registration'),
         'send_confirm_email' => '/' . lng('send_confirm_email') . '/[email]',
-    ]
+    ],
 ];

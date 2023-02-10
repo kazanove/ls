@@ -80,3 +80,16 @@ function getArr(array $specialists, DataBase $db): array
     }
     return $result ?? [];
 }
+
+function notaries(DataBase $db, int $city_id, int $limit = 0): array
+{
+    $params[':city'] = $city_id;
+    if ($limit === 0) {
+        $l = '';
+    } else {
+        $l = 'LIMIT :limit';
+        $params[':limit'] = $limit;
+    }
+    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif > NOW()  AND (s.classification_id=4 or s.classification_id=8) ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC '.$l,$params);
+    return getArr($specialists, $db);
+}
