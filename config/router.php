@@ -12,6 +12,7 @@ return [
         '/' . lng('service') . '/[service]' => 'service',
          '/' . lng('services') . '/[service]/[sub_service]'=>'services',
         '/' . lng('feedback')=> 'feedback',
+        '/' . lng('password_recovery')=>'password_recovery',
     ],
     'name' => [
         'lawyers_advocates' => '/' . lng('lawyers_advocates'),
