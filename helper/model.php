@@ -54,7 +54,7 @@ function experts(DataBase $db, ?int $city_id, int $limit = 0): array
         $l = 'LIMIT :limit';
         $params[':limit'] = $limit;
     }
-    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif > NOW()  AND (s.classification_id=3 or s.classification_id=7) ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC '.$l, $params);
+    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tariff > NOW()  AND (s.classification_id=3 or s.classification_id=7) ORDER BY tariff_id DESC, date_end_tariff DESC, r.rating DESC '.$l, $params);
     return getArr($specialists, $db);
 }
 /**
@@ -90,7 +90,7 @@ function notaries(DataBase $db, ?int $city_id, int $limit = 0): array
         $l = 'LIMIT :limit';
         $params[':limit'] = $limit;
     }
-    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif > NOW()  AND (s.classification_id=4 or s.classification_id=8) ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC '.$l,$params);
+    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tariff > NOW()  AND (s.classification_id=4 or s.classification_id=8) ORDER BY tariff_id DESC, date_end_tariff DESC, r.rating DESC '.$l,$params);
     return getArr($specialists, $db);
 }
 function specialistTop(DataBase $db, ?int $city_id, int $limit = 0): array
@@ -102,7 +102,7 @@ function specialistTop(DataBase $db, ?int $city_id, int $limit = 0): array
         $l = 'LIMIT :limit';
         $params[':limit'] = $limit;
     }
-    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif >NOW() ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC '.$l, $params);
+    $specialists = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tariff >NOW() ORDER BY tariff_id DESC, date_end_tariff DESC, r.rating DESC '.$l, $params);
     return getArr($specialists, $db);
 }
 function lawyersAdvocates(DataBase $db, ?int $city_id, int $limit = 0): array
@@ -114,7 +114,7 @@ function lawyersAdvocates(DataBase $db, ?int $city_id, int $limit = 0): array
         $l = 'LIMIT :limit';
         $params[':limit'] = $limit;
     }
-    $lawyersAdvocates = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tarif > NOW()  AND (s.classification_id=1 or s.classification_id=2 or s.classification_id=5 or s.classification_id=6) ORDER BY tariff_id DESC, date_end_tarif DESC, r.rating DESC ' . $l, $params);
+    $lawyersAdvocates = $db->query('SELECT s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tarif FROM specialists s LEFT JOIN ratings r ON r.specialist_id = s.id WHERE city_id = :city AND	date_end_tariff > NOW()  AND (s.classification_id=1 or s.classification_id=2 or s.classification_id=5 or s.classification_id=6) ORDER BY tariff_id DESC, date_end_tariff DESC, r.rating DESC ' . $l, $params);
     return getArr($lawyersAdvocates, $db);
 }
 function metro(DataBase $db): array
@@ -135,4 +135,17 @@ function sections(DataBase $db, array $section = []): array
         ];
     }
     return $s ?? [];
+}
+function specialist(DataBase $db, int $city_id,int $service, int $limit = 0): array
+{
+    $params[':city'] = $city_id;
+    $params[':service']=$service;
+    if ($limit === 0) {
+        $l = '';
+    } else {
+        $l = 'LIMIT :limit';
+        $params[':limit'] = $limit;
+    }
+    $specialists = $db->query('select s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating,  s.tariff_id as tariff from services_provided sp left join specialists s on sp.specialist_id = s.id left join ratings r on r.specialist_id =s.id  where sp.service_id = :service and s.city_id=:city and date_end_tariff > NOW() ORDER BY tariff_id DESC, s.date_end_tariff DESC, r.rating desc  '.$l,$params);
+    return getArr($specialists, $db);
 }

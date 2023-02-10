@@ -9,7 +9,7 @@
  */
 include dirname(__DIR__) . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR . 'beforeController.php';
 
-$specialists = $db->query('select s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating, s.tarif_id as tarif from specialists as s  LEFT JOIN ratings r ON r.specialist_id = s.id where city_id = :city and date_end_tarif > NOW() and (classification_id =1 or classification_id=2 or classification_id=5 or classification_id=6) ORDER BY tarif DESC, s.date_end_tarif DESC, rating DESC', [
+$specialists = $db->query('select s.id as id, CONCAT(s.name,\' \',s.surname) AS name , s.classification_id AS classification, s.city_id AS city, s.photo AS photo, r.rating AS rating, s.tarif_id as tarif from specialists as s  LEFT JOIN ratings r ON r.specialist_id = s.id where city_id = :city and date_end_tariff > NOW() and (classification_id =1 or classification_id=2 or classification_id=5 or classification_id=6) ORDER BY tarif DESC, s.date_end_tarif DESC, rating DESC', [
     ':city' => $_COOKIE['city'] ?? $cities[0]['id'] ?? null,
 ]);
 $sp = [];

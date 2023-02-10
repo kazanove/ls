@@ -18,21 +18,21 @@
                         <a href="<?= route('service', ['sub_service' => lng('services.62.title', false)]) ?>"><?=lng('services.62.title') ?></a>
                     </li>
                     <li>
-                        <a href="<?= route('service', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.91.title', false)]) ?>"><?= lng('services.91.title') ?></a>
+                        <a href="<?= route('services', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.91.title', false)]) ?>"><?= lng('services.91.title') ?></a>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <a href="<?= route('service', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.90.title', false)]) ?>"><?= lng('services.90.title', false) ?></a>
+                        <a href="<?= route('services', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.90.title', false)]) ?>"><?= lng('services.90.title', false) ?></a>
                     </li>
                     <li>
-                        <a href="<?= route('service', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.92.title', false)]) ?>"><?= lng('services.92.title', false) ?></a>
+                        <a href="<?= route('services', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.92.title', false)]) ?>"><?= lng('services.92.title', false) ?></a>
                     </li>
                     <li>
-                        <a href="<?= route('service', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.89.title', false)]) ?>"><?= lng('services.89.title', false) ?></a>
+                        <a href="<?= route('services', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.89.title', false)]) ?>"><?= lng('services.89.title', false) ?></a>
                     </li>
                     <li>
-                        <a href="<?= route('service', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.91.title', false)]) ?>"><?= lng('services.91.title', false) ?></a>
+                        <a href="<?= route('services', ['service'=>str_replace(' ','_',lng('expertise',false)),'sub_service' => lng('services.91.title', false)]) ?>"><?= lng('services.91.title', false) ?></a>
                     </li>
                 </ul>
             </nav>

@@ -80,7 +80,7 @@ if (isset($router)) {
                         }
                     }
                     if (is_string($callback)) {
-                        if (file_exists($controller = __DIR__ . DIRECTORY_SEPARATOR . 'Controller' . DIRECTORY_SEPARATOR . $callback . '.php')) {
+                        if (file_exists($controller = __DIR__ . DIRECTORY_SEPARATOR . 'controller' . DIRECTORY_SEPARATOR . $callback . '.php')) {
                             extract($params, EXTR_OVERWRITE);
                             include __DIR__ . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR . 'beforeController.php';
                             include $controller;
@@ -94,6 +94,7 @@ if (isset($router)) {
                 }
             }
         }
+        trigger_error('');die();
         if ($url !== '/404') {
             header('Location: /404', true, 302);
             exit(404);

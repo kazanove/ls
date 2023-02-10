@@ -29,7 +29,7 @@
                                     echo "\n" . '<div class="nav">' . "\n";
                                     echo "\t" . '<ul>' . "\n";
                                 }
-                                echo "\t\t" . '<li><a title=\'' . lng('services.' . $serviceSub['id'] . '.description') . '\' href="' . route('service', ['service' => str_replace(' ', '_', lng('services.' . $service['id'] . '.title', false)), 'sub_service' => str_replace(' ', '_', lng('services.' . $serviceSub['id'] . '.title', false))]) . '">' . lng('services.' . $serviceSub['id'] . '.title') . '</a></li>' . "\n";
+                                echo "\t\t" . '<li><a title=\'' . lng('services.' . $serviceSub['id'] . '.description') . '\' href="' . route('services', ['service' => str_replace(' ', '_', lng('services.' . $service['id'] . '.title', false)), 'sub_service' => str_replace(' ', '_', lng('services.' . $serviceSub['id'] . '.title', false))]) . '">' . lng('services.' . $serviceSub['id'] . '.title') . '</a></li>' . "\n";
                                 $i++;
                                 if ($countServices <= $i) {
                                     $i = 0;
@@ -60,7 +60,7 @@
                     <?php
                     foreach ($services as $service) {
                         if ($service['c_id'] === 3) {
-                            echo '<li><a title="' . lng('services.' . $service['id'] . '.title') . '" href="' . route('service', ['service' => lng('expertise', false), 'sub_service' => str_replace(' ', '_', lng('services.' . $service['id'] . '.title', false))]) . '">' . lng('services.' . $service['id'] . '.title') . '</a></li>';
+                            echo '<li><a title="' . lng('services.' . $service['id'] . '.title') . '" href="' . route('services', ['service' => lng('expertise', false), 'sub_service' => str_replace(' ', '_', lng('services.' . $service['id'] . '.title', false))]) . '">' . lng('services.' . $service['id'] . '.title') . '</a></li>';
                         }
                     }
                     ?>
