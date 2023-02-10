@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var string @url
+ */
 $dirInclude = config('view.path') . 'include' . DIRECTORY_SEPARATOR;
 include $dirInclude . 'head.php';
 ?>

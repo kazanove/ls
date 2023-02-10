@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $url
+ */
+?>
 <script>
     if (!$.cookie('city')) {
         $('.popup.cities').fadeIn();

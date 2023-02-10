@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var string $city
+ * @var array $user
+ */
+?>
+
 <header class="header">
     <div class="wrap">
         <div class="flex">
