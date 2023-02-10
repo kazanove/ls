@@ -11,6 +11,7 @@ return [
         '/' . lng('city') => 'city',
         '/' . lng('service') . '/[service]' => 'service',
          '/' . lng('services') . '/[service]/[sub_service]'=>'services',
+        '/' . lng('feedback')=> 'feedback',
     ],
     'name' => [
         'lawyers_advocates' => '/' . lng('lawyers_advocates'),

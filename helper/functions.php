@@ -201,3 +201,18 @@ function specialistCards(array $specialists): void
     }
     //return [$tariff, $class, $i, $r];
 }
+function send_mail(string $to, string $subject, string $template, array $params = []): void
+{
+    ob_start();
+    extract($params, EXTR_OVERWRITE);
+    if (file_exists($path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'resource' . DIRECTORY_SEPARATOR . 'mail' . DIRECTORY_SEPARATOR . $template . '.php')) {
+        include $path;
+    } else {
+        echo $template;
+    }
+    $message = ob_get_clean();
+    $message = wordwrap($message, 140, "\r\n");
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=utf-8';
+    mail('<' . $to . '>', $subject, $message, implode("\r\n", $headers));
+}
